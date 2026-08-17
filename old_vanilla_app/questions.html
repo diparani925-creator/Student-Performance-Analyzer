@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Quiz - Student System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="student-body">
+
+    <div class="header-content">
+        <h2>Student Quiz System</h2>
+        <button class="btn-logout" onclick="logoutStudent()">Logout</button>
+    </div>
+
+    <div class="container quiz-container">
+        
+        <!-- Quiz Settings (Pre-quiz) -->
+        <div id="quizSettings" class="card fade-in">
+            <h2 class="text-center">Personalized Assessment Setup</h2>
+            <form onsubmit="return startQuiz(event)">
+                <div style="margin-bottom: 15px;">
+                    <input type="text" id="studentName" placeholder="Student Name" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
+                </div>
+                <div class="form-row">
+                    <input type="text" id="currentCourse" placeholder="Current Course (e.g., 12th, BCA)" style="width: 48%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
+                    <input type="text" id="interestedField" placeholder="Interested Field (e.g., JEE, Web Dev)" style="width: 48%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
+                </div>
+                <div class="form-row">
+                    <select id="difficulty" required>
+                        <option value="">Select Difficulty</option>
+                        <option value="Easy">Easy</option>
+                        <option value="Medium" selected>Medium</option>
+                        <option value="Hard">Hard</option>
+                    </select>
+                    <input type="number" id="questionCount" min="1" max="20" value="5" placeholder="No. of Questions" required>
+                </div>
+                <select id="questionType" required>
+                    <option value="">Select Question Type</option>
+                    <option value="MCQ" selected>Multiple Choice</option>
+                    <option value="Numerical">Numerical</option>
+                </select>
+                <button type="submit" class="btn-primary w-100 mt-20">Start Test</button>
+            </form>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loadingArea" class="text-center" style="display: none; padding: 50px;">
+            <div class="spinner"></div>
+            <h3 class="mt-20">AI is generating questions... Please wait ⏳</h3>
+        </div>
+
+        <!-- Active Quiz Area -->
+        <div id="quizArea" class="card" style="display: none;">
+            <div class="quiz-header">
+                <h3 id="courseTitle">Quiz</h3>
+                <div class="timer" id="timerDisplay">Time Left: 00:00</div>
+            </div>
+            
+            <div class="progress-bar-container mt-10">
+                <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+            </div>
+
+            <form id="quizForm">
+                <div id="questionBox" class="mt-20">
+                    <!-- Single Question goes here -->
+                </div>
+                
+                <div class="quiz-controls mt-20">
+                    <button type="button" id="prevBtn" class="btn-secondary" onclick="prevQuestion()" disabled>Previous</button>
+                    <span id="questionCounter">1 / 5</span>
+                    <button type="button" id="nextBtn" class="btn-primary" onclick="nextQuestion()">Next</button>
+                    <button type="button" id="submitBtn" class="btn-success" onclick="calculateResult(event)" style="display: none;">Submit Test</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Result Area -->
+        <div id="resultBox" class="card" style="display: none;">
+            <!-- Charts and score go here -->
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function logoutStudent() {
+            localStorage.clear();
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
