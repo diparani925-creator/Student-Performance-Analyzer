@@ -1,9 +1,0 @@
-node_modules/
-dist/
-dist-ssr/
-.env
-.env*.local
-*.log
-.vscode/
-.DS_Store
-.idea/
