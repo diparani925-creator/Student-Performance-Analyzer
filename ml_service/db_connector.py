@@ -95,3 +95,4 @@ def fetch_student_results_df(
         return pd.DataFrame(rows, columns=RESULT_COLUMNS)
     finally:
         conn.close()
+

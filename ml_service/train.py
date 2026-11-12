@@ -251,3 +251,4 @@ def train_from_mysql(save_artifacts: bool = True) -> Dict[str, Any]:
 if __name__ == "__main__":
     result = train_from_mysql(save_artifacts=True)
     print(json.dumps(result, indent=2))
+

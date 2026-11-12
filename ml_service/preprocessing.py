@@ -240,3 +240,4 @@ def extract_next_quiz_context(student_df: pd.DataFrame) -> Dict[str, Any]:
         "trend_delta": trend_delta,
         "features": features,
     }
+
