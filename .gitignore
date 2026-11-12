@@ -20,7 +20,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Python
+# Python & Testing
 .venv/
 venv/
 ENV/
@@ -30,6 +30,8 @@ __pycache__/
 *$py.class
 *.joblib
 ml_service/models/
+.pytest_cache/
+*/.pytest_cache/
 
 # IDE / OS
 .vscode/

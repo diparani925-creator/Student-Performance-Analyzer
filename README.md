@@ -378,23 +378,31 @@ cd Student-Performance-Analyzer
 
 ### Step 3: Install Dependencies
 
+Run the following commands from the project root (`STUDENT PERFORMANCE ANALYZER`):
+
+#### 1. Root Workspace Utilities & Node Services
 ```bash
-# 1. Install root workspace runner dependencies
+# Install root runner (concurrently)
 npm install
 
-# 2. Install backend Node.js packages
-cd backend
-npm install
+# Install backend dependencies (Express, Gemini AI SDK, MySQL2, etc.)
+npm install --prefix backend
 
-# 3. Install frontend React packages
-cd ../frontend
-npm install
-
-# 4. Install Python ML service dependencies
-cd ../ml_service
-pip install -r requirements.txt
-cd ..
+# Install frontend dependencies (React 19, Vite, Chart.js, etc.)
+npm install --prefix frontend
 ```
+
+#### 2. Machine Learning Python Virtual Environment (Windows)
+Set up the Python virtual environment and install the required machine learning packages:
+```powershell
+# Create Python virtual environment inside ml_service
+python -m venv ml_service\.venv
+
+# Install pinned ML dependencies (Scikit-Learn, Pandas, Flask, etc.)
+.\ml_service\.venv\Scripts\python.exe -m pip install -r ml_service\requirements.txt
+```
+
+*(On macOS/Linux, use `python3 -m venv ml_service/.venv && ./ml_service/.venv/bin/pip install -r ml_service/requirements.txt`)*
 
 ---
 
@@ -417,34 +425,38 @@ cd ..
 
 ## 🚀 Running the Application
 
-### Option A: Single Command Runner (Recommended)
-You can launch the **Frontend**, **Backend**, and **Python ML Service** concurrently from the project root:
+### Option A: Single Command Concurrent Runner (Recommended)
+You can launch the **Backend API (Port 5000)**, **Frontend Client (Port 5173)**, and **Python ML Service (Port 5001)** simultaneously from the project root:
 
 ```bash
 npm run dev
 ```
 
+*The terminal displays color-coded, labeled outputs for easy live monitoring:*
+- `[BACKEND]` 🚀 Server running on `http://localhost:5000` & connected to MySQL.
+- `[FRONTEND]` ⚡ Vite ready on `http://localhost:5173/`.
+- `[ML]` 🤖 Flask ML service active on `http://127.0.0.1:5001`.
+
 ### Option B: Running Services Individually
 
+If you prefer running each service in a separate terminal:
+
 1. **Start the Python ML Microservice** (Terminal 1):
-   ```bash
-   cd ml_service
-   python app.py
-   # Service starts at http://localhost:5001
+   ```powershell
+   npm run start:ml
+   # Alternatively: .\ml_service\.venv\Scripts\python.exe ml_service\app.py
    ```
 
 2. **Start the Node.js Express API** (Terminal 2):
-   ```bash
-   cd backend
-   npm start
-   # Server starts at http://localhost:5000
+   ```powershell
+   npm run start:backend
+   # Alternatively: cd backend && npm start
    ```
 
 3. **Start the React Frontend** (Terminal 3):
-   ```bash
-   cd frontend
-   npm run dev
-   # App available at http://localhost:5173
+   ```powershell
+   npm run start:frontend
+   # Alternatively: cd frontend && npm run dev
    ```
 
 ---
