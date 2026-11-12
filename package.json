@@ -1,0 +1,12 @@
+{
+  "name": "student-performance-analyzer",
+  "version": "1.0.0",
+  "description": "Root package to run backend, frontend, and Python ML service concurrently",
+  "scripts": {
+    "start:ml": "ml_service\\.venv\\Scripts\\python.exe ml_service\\app.py",
+    "dev": "concurrently \"npm run start --prefix backend\" \"npm run dev --prefix frontend\" \"npm run start:ml\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

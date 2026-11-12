@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Career Predictor - Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Create an Account</h2>
+        
+        <div id="messageBox" style="display: none; padding: 10px; margin-bottom: 10px; border-radius: 5px;"></div>
+
+        <form id="registerForm" onsubmit="return handleRegister(event)">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <input type="password" id="password" placeholder="Password" required>
+
+            <input type="submit" value="Sign Up" style="margin-top: 15px;">
+            
+            <p style="margin-top: 15px; font-size: 14px; color: #4a5568;">
+                Already have an account? <a href="login.html" style="color: #667eea; text-decoration: none; font-weight: 600;">Login here</a>
+            </p>
+        </form>
+    </div>
+
+    <script>
+        async function handleRegister(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const messageBox = document.getElementById("messageBox");
+
+            try {
+                const response = await fetch("http://localhost:5000/api/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await response.json();
+                messageBox.style.display = "block";
+
+                if (response.ok) {
+                    messageBox.style.backgroundColor = "#d4edda";
+                    messageBox.style.color = "#155724";
+                    messageBox.innerText = data.message;
+
+                    setTimeout(() => {
+                        window.location.href = "login.html";
+                    }, 1500);
+                } else {
+                    messageBox.style.backgroundColor = "#f8d7da";
+                    messageBox.style.color = "#721c24";
+                    messageBox.innerText = data.error || "Registration failed";
+                }
+            } catch (error) {
+                console.error("Register error:", error);
+                messageBox.style.display = "block";
+                messageBox.style.backgroundColor = "#f8d7da";
+                messageBox.style.color = "#721c24";
+                messageBox.innerText = "Network error occurred";
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>

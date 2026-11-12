@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Production builds
+dist/
+dist-ssr/
+build/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+!*/.env.example
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+.venv/
+venv/
+ENV/
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+*.joblib
+ml_service/models/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
